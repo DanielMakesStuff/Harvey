@@ -1,0 +1,496 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    color: white;
+    font-family: monospace;
+}
+
+button,
+select,
+input {
+    font-family: monospace;
+}
+
+/* MENU */
+
+#menu {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 50% 45%, #30352f 0%, #171a17 35%, #070807 75%, #000 100%);
+    z-index: 1000;
+}
+
+.menuContent {
+    text-align: center;
+}
+
+.studio {
+    color: #8c9688;
+    font-size: 12px;
+    letter-spacing: 8px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    margin: 0;
+    font-size: clamp(70px, 13vw, 150px);
+    letter-spacing: 18px;
+    color: #d8ddd5;
+    text-shadow: 5px 5px #101210, 0 0 35px #777;
+}
+
+#subtitle {
+    color: #858b82;
+    letter-spacing: 4px;
+    font-size: 12px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.buttons button {
+    width: 270px;
+    padding: 16px;
+    background: #101310;
+    color: white;
+    border: 2px solid #737b70;
+    font-size: 15px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.buttons button:hover {
+    background: #d8ddd5;
+    color: #111;
+}
+
+.controls {
+    margin-top: 25px;
+    color: #656b63;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.copyright {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #383d38;
+    font-size: 10px;
+    letter-spacing: 3px;
+    white-space: nowrap;
+}
+
+/* SETTINGS */
+
+#settings {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,.97);
+    z-index: 2000;
+}
+
+.settingsBox {
+    width: 480px;
+    max-width: 90vw;
+    padding: 35px;
+    background: #101210;
+    border: 1px solid #70776c;
+    box-shadow: 0 0 50px #000;
+}
+
+.settingsBox h2 {
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+.settingsBox label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 28px 0;
+    color: #aaa;
+}
+
+.settingsBox select {
+    padding: 8px;
+    background: #181b18;
+    color: white;
+    border: 1px solid #666;
+}
+
+.settingsBox input {
+    width: 180px;
+}
+
+#backBtn {
+    display: block;
+    margin: 35px auto 0;
+    padding: 12px 40px;
+    background: #111;
+    color: white;
+    border: 1px solid #777;
+    cursor: pointer;
+}
+
+#backBtn:hover {
+    background: white;
+    color: black;
+}
+
+/* GAME */
+
+#game {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #171914;
+}
+
+#canvas {
+    width: min(1200px, 100vw);
+    height: min(700px, 100vh);
+    background: #20231e;
+    image-rendering: pixelated;
+}
+
+/* HUD */
+
+#hud {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    gap: 7px;
+    z-index: 100;
+    pointer-events: none;
+}
+
+#hud div {
+    min-width: 100px;
+    padding: 9px 12px;
+    background: rgba(5,6,5,.92);
+    border: 1px solid #555;
+}
+
+#hud small {
+    display: block;
+    color: #777;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+#hud b {
+    display: block;
+    margin-top: 4px;
+}
+
+/* OBJECTIVE */
+
+#objective {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    max-width: 300px;
+    padding: 10px 14px;
+    background: rgba(5,6,5,.94);
+    border: 1px solid #555;
+    color: #aaa;
+    font-size: 11px;
+    z-index: 100;
+}
+
+/* ROOM */
+
+#room {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 18px;
+    background: rgba(5,6,5,.9);
+    border: 1px solid #444;
+    color: #aaa;
+    font-size: 11px;
+    z-index: 100;
+}
+
+/* INTERACTION */
+
+#interact {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 18px;
+    background: rgba(0,0,0,.9);
+    border: 1px solid #777;
+    display: none;
+    z-index: 100;
+}
+
+/* DANGER */
+
+#danger {
+    position: fixed;
+    top: 105px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    font-size: 32px;
+    color: #ddd;
+    z-index: 150;
+    animation: danger .3s infinite alternate;
+}
+
+@keyframes danger {
+    from { opacity: .2; }
+    to { opacity: 1; }
+}
+
+/* MESSAGE */
+
+#message {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    max-width: 85vw;
+    padding: 30px;
+    background: rgba(0,0,0,.96);
+    border: 1px solid #666;
+    text-align: center;
+    white-space: pre-line;
+    line-height: 1.8;
+    display: none;
+    z-index: 500;
+}
+
+/* MP3 */
+
+#mp3 {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 230px;
+    padding: 15px;
+    background: #0b0d0b;
+    border: 2px solid #4d554b;
+    display: none;
+    z-index: 120;
+}
+
+#mp3 strong {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+#mp3 small {
+    display: block;
+    color: #777;
+    margin-top: 6px;
+}
+
+#mp3 button {
+    margin-top: 10px;
+    width: 40px;
+    height: 30px;
+    background: #181b18;
+    color: white;
+    border: 1px solid #777;
+}
+
+/* CAMERA */
+
+#camera {
+    position: fixed;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #030403;
+    z-index: 1000;
+}
+
+.cameraTop {
+    width: 800px;
+    max-width: 92vw;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    background: #111411;
+    border: 1px solid #555;
+}
+
+#cameraCanvas {
+    width: 800px;
+    max-width: 92vw;
+    border: 2px solid #555;
+    image-rendering: pixelated;
+}
+
+.cameraButtons {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.cameraButtons button,
+#closeCamera {
+    padding: 9px 14px;
+    background: #111411;
+    color: white;
+    border: 1px solid #555;
+    cursor: pointer;
+}
+
+#closeCamera {
+    margin-top: 10px;
+}
+
+/* CUTSCENE */
+
+#cutscene {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    z-index: 1500;
+    text-align: center;
+}
+
+#cutsceneText {
+    width: 750px;
+    max-width: 85vw;
+    font-size: 18px;
+    line-height: 2;
+    white-space: pre-line;
+}
+
+/* CREDITS */
+
+#credits {
+    position: fixed;
+    inset: 0;
+    display: none;
+    overflow: hidden;
+    background: #000;
+    z-index: 1600;
+    text-align: center;
+}
+
+.creditsScroll {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    animation: credits 35s linear forwards;
+}
+
+@keyframes credits {
+    from { top: 100%; }
+    to { top: -140%; }
+}
+
+.creditsScroll h2 {
+    font-size: 90px;
+    letter-spacing: 15px;
+    margin: 25px 0;
+}
+
+.creditsScroll p {
+    color: #777;
+    letter-spacing: 4px;
+}
+
+.creditsScroll strong {
+    font-size: 18px;
+    letter-spacing: 3px;
+}
+
+.tiny {
+    color: #777;
+    letter-spacing: 5px;
+}
+
+.space {
+    height: 100px;
+}
+
+.quote {
+    color: #aaa !important;
+}
+
+#menuBtn {
+    display: block;
+    margin: 120px auto;
+    padding: 14px 35px;
+    background: #111;
+    color: white;
+    border: 1px solid #777;
+    cursor: pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    h1 {
+        font-size: 60px;
+        letter-spacing: 7px;
+    }
+
+    .studio {
+        font-size: 8px;
+        letter-spacing: 3px;
+    }
+
+    #subtitle {
+        font-size: 8px;
+    }
+
+    .buttons button {
+        width: 230px;
+    }
+
+    #hud {
+        transform: scale(.7);
+        transform-origin: top left;
+    }
+
+    #objective {
+        top: 70px;
+        right: 8px;
+        max-width: 180px;
+        font-size: 8px;
+    }
+}

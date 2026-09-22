@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>HARVEY — KINETIC STUDIOS</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<!-- =====================================================
+     MAIN MENU
+===================================================== -->
+
+<section id="menu">
+
+    <div class="menuBackground"></div>
+
+    <div class="menuContent">
+
+        <div class="studio">
+            KINETIC STUDIOS
+        </div>
+
+        <h1>HARVEY</h1>
+
+        <p id="subtitle">
+            SOME MEMORIES DON'T STAY DEAD.
+        </p>
+
+        <div class="buttons">
+
+            <button
+                type="button"
+                id="playBtn"
+            >
+                START NIGHT 1
+            </button>
+
+            <button
+                type="button"
+                id="settingsBtn"
+            >
+                SETTINGS
+            </button>
+
+        </div>
+
+        <div class="controls">
+
+            <div>
+                WASD — MOVE
+            </div>
+
+            <div>
+                SHIFT — RUN
+            </div>
+
+            <div>
+                E — INTERACT
+            </div>
+
+            <div>
+                C — CAMERAS
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            KINETIC STUDIOS // HARVEY
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
+
+<section id="settings">
+
+    <div class="settingsBox">
+
+        <div class="settingsSmall">
+            KINETIC STUDIOS
+        </div>
+
+        <h2 id="settingsTitle">
+            SETTINGS
+        </h2>
+
+        <label>
+
+            <span id="languageLabel">
+                LANGUAGE
+            </span>
+
+            <select id="language">
+
+                <option value="en">
+                    English
+                </option>
+
+                <option value="ru">
+                    Русский
+                </option>
+
+            </select>
+
+        </label>
+
+
+        <label>
+
+            <span id="volumeLabel">
+                MASTER VOLUME
+            </span>
+
+            <input
+                id="volume"
+                type="range"
+                min="0"
+                max="100"
+                value="70"
+            >
+
+        </label>
+
+
+        <button
+            type="button"
+            id="backBtn"
+        >
+            BACK
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GAME
+===================================================== -->
+
+<section id="game">
+
+    <canvas
+        id="canvas"
+        width="1200"
+        height="700"
+    ></canvas>
+
+
+    <!-- =================================================
+         HUD
+    ================================================= -->
+
+    <div id="hud">
+
+        <div class="hudItem">
+
+            <small>
+                TIME
+            </small>
+
+            <b id="time">
+                12:00 AM
+            </b>
+
+        </div>
+
+
+        <div class="hudItem">
+
+            <small>
+                POWER
+            </small>
+
+            <b id="power">
+                100%
+            </b>
+
+        </div>
+
+
+        <div class="hudItem">
+
+            <small>
+                CLUES
+            </small>
+
+            <b id="clues">
+                0 / 5
+            </b>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         OBJECTIVE
+    ================================================= -->
+
+    <div id="objective">
+        OBJECTIVE: SEARCH THE BUILDING
+    </div>
+
+
+    <!-- =================================================
+         ROOM NAME
+    ================================================= -->
+
+    <div id="room">
+        MAIN HOUSE
+    </div>
+
+
+    <!-- =================================================
+         INTERACTION PROMPT
+    ================================================= -->
+
+    <div id="interact">
+        PRESS E TO INTERACT
+    </div>
+
+
+    <!-- =================================================
+         DANGER INDICATOR
+    ================================================= -->
+
+    <div id="danger">
+        !
+    </div>
+
+
+    <!-- =================================================
+         MESSAGE
+    ================================================= -->
+
+    <div id="message"></div>
+
+
+    <!-- =================================================
+         OLD MP3 PLAYER
+    ================================================= -->
+
+    <div id="mp3">
+
+        <div class="mp3Header">
+            OLD MP3 PLAYER
+        </div>
+
+        <div class="mp3File">
+            HARVEY.MP3
+        </div>
+
+        <button
+            type="button"
+            id="mp3Btn"
+        >
+            ▶
+        </button>
+
+        <span id="mp3State">
+            STOPPED
+        </span>
+
+    </div>
+
+
+    <!-- =================================================
+         SECURITY CAMERA SYSTEM
+    ================================================= -->
+
+    <div id="camera">
+
+        <div class="cameraTop">
+
+            <span>
+                SECURITY MONITOR
+            </span>
+
+            <span id="cameraName">
+                CAM 01
+            </span>
+
+        </div>
+
+
+        <canvas
+            id="cameraCanvas"
+            width="800"
+            height="450"
+        ></canvas>
+
+
+        <div class="cameraButtons">
+
+            <button
+                type="button"
+                data-camera="0"
+            >
+                CAM 01
+            </button>
+
+            <button
+                type="button"
+                data-camera="1"
+            >
+                CAM 02
+            </button>
+
+            <button
+                type="button"
+                data-camera="2"
+            >
+                CAM 03
+            </button>
+
+            <button
+                type="button"
+                data-camera="3"
+            >
+                CAM 04
+            </button>
+
+            <button
+                type="button"
+                data-camera="4"
+            >
+                CAM 05
+            </button>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="closeCamera"
+        >
+            CLOSE MONITOR
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         ENDING CUTSCENE
+    ================================================= -->
+
+    <div id="cutscene">
+
+        <div class="cutsceneOverlay"></div>
+
+        <div id="cutsceneText"></div>
+
+    </div>
+
+
+    <!-- =================================================
+         CREDITS
+    ================================================= -->
+
+    <div id="credits">
+
+        <div class="creditsScroll">
+
+            <div class="tiny">
+                KINETIC STUDIOS PRESENTS
+            </div>
+
+
+            <h2>
+                HARVEY
+            </h2>
+
+
+            <p>
+                A KINETIC STUDIOS GAME
+            </p>
+
+
+            <div class="space"></div>
+
+
+            <p>
+                STORY
+            </p>
+
+            <strong>
+                DANIEL GRYOMIN
+            </strong>
+
+
+            <div class="space"></div>
+
+
+            <p>
+                GAME DESIGN
+            </p>
+
+            <strong>
+                KARIM MUSTAFAYEV
+            </strong>
+
+
+            <div class="space"></div>
+
+
+            <p>
+                PROGRAMMING
+            </p>
+
+            <strong>
+                DANIEL GRYOMIN
+            </strong>
+
+
+            <div class="space"></div>
+
+
+            <p>
+                WHY WE MADE HARVEY
+            </p>
+
+            <strong class="creditsStory">
+
+                HARVEY IS MORE THAN JUST A GAME TO US.
+
+                <br><br>
+
+                IT IS A PROJECT WE BUILT TOGETHER,
+                A STORY WE CREATED FROM OUR OWN IDEAS,
+                AND A REMINDER OF HOW FAR WE CAN GO
+                WHEN WE WORK TOGETHER.
+
+                <br><br>
+
+                EVERY DETAIL, EVERY ROOM,
+                EVERY SOUND AND EVERY MEMORY
+                HAS A PIECE OF OUR WORK IN IT.
+
+                <br><br>
+
+                THIS GAME IS IMPORTANT TO US
+                BECAUSE IT IS THE BEGINNING OF SOMETHING.
+
+            </strong>
+
+
+            <div class="space"></div>
+
+
+            <p>
+                CREATED BY
+            </p>
+
+            <strong>
+
+                DANIEL GRYOMIN
+                <br>
+                KARIM MUSTAFAYEV
+
+            </strong>
+
+
+            <div class="space"></div>
+
+
+            <p class="quote">
+                SOME MEMORIES DON'T STAY DEAD.
+            </p>
+
+
+            <div class="space"></div>
+
+
+            <strong>
+                THANK YOU FOR PLAYING.
+            </strong>
+
+
+            <button
+                type="button"
+                id="menuBtn"
+            >
+                RETURN TO MENU
+            </button>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     MOBILE TOUCH CONTROLS
+===================================================== -->
+
+<div id="mobileControls">
+
+    <div
+        id="mobileJoystick"
+        class="mobileJoystick"
+    >
+
+        <div
+            id="joystickKnob"
+            class="joystickKnob"
+        ></div>
+
+    </div>
+
+
+    <div class="mobileButtons">
+
+        <button
+            type="button"
+            id="mobileRun"
+        >
+            RUN
+        </button>
+
+        <button
+            type="button"
+            id="mobileInteract"
+        >
+            E
+        </button>
+
+        <button
+            type="button"
+            id="mobileCamera"
+        >
+            CAM
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     STARTUP SAFETY LAYER
+===================================================== -->
+
+<div id="loadingScreen">
+
+    <div class="loadingBox">
+
+        <div class="loadingTitle">
+            HARVEY
+        </div>
+
+        <div class="loadingStudio">
+            KINETIC STUDIOS
+        </div>
+
+        <div class="loadingText">
+            INITIALIZING...
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
